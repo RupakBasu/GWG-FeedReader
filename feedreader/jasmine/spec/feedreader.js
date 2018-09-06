@@ -128,28 +128,25 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
          beforeEach(function(done){
-           loadFeed(0); //loadFeed 0 is looking at the first load feed array function
-           done();
+           loadFeed(0 , done); //loadFeed 0 is looking at the first load feed array function
+
          });
          // done() that signals to the framework when an asynchronous function has completed and we’re ready to go run our tests.
-         let feed = document.querySelector('feed');
-         let entry = document.querySelector('entry');
+
+         // Only need a single call to "done" as soon as it's called the function ends
+
          //The project sheet asks to be sure that atleast one entry should be present in the feed
          // the articles have a class of entry. Basically we need to be sure that there is ATLEAST one of these in the feed
 
-         it('loadFeed called and complete work', function(done) {
-           expect(feed).toBeDefined();
-           expect(feed).toBeNull(false);
-           expect(entry).toBeNull(false);
-           expect($( "div.feed").children( entry ).length > 0).toBe(false);
-           expect($(entry).parent( feed ).length > 0).toBe(false);
+         it('loadFeed called and complete work', function() {
 
-           // expect(entry.parentClass.length > 0).toBe(true);
-           // expect(feed.children.length > 0).toBe(true);
-           // expect(feed.length).not.toBe(0);
-           // expect($( "div.feed" ).children( entry ).length).toBeGreaterThan(0);
+           let feed = document.querySelector('.feed');
+           let entry = document.querySelector('.entry');
+           expect($(feed).children(entry).length > 0).toBe(true);
 
-           done();
+           // const feedly = document.querySelectorAll('.feed .entry');
+           // expect(feedly.length).toBeGreaterThan(0);
+
          });
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
